@@ -1,0 +1,5 @@
+<aura:component >
+    <aura:registerEvent type="c:requireJSLoaded" name="rJSEvt" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="src" type="String" default="/resource/RequireJS" description="RequireJS script path" />
+</aura:component>

@@ -1,0 +1,23 @@
+<aura:component controller="InputLookupController">
+    <aura:handler event="c:requireJSLoaded" action="{!c.initTypeahead}"/>
+    <c:requireJSLoader src="/resource/RequireJS" />
+    <aura:handler name="init" value="{!this}" action="{!c.setup}"/>
+    
+    <link rel="stylesheet" type="text/css" href="/resource/Lgt_InputLookup/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/resource/Lgt_InputLookup/css/typeahead.css"/>
+ 	
+    <aura:attribute name="type" type="String" description="Sobject Type" required="true"/>
+    <aura:attribute name="value" type="String" description="Source / Destination value" />
+    <aura:attribute name="className" type="String" description="class name of the input object" />
+    <!-- PRIVATE ATTRS -->
+    <aura:attribute name="nameValue" type="String" description="Name of the current lookup 'name' field: loaded by controller" 
+                    access="PRIVATE"/>
+    <aura:attribute name="isLoading" type="Boolean" description="Loading component" default="true"
+                    access="PRIVATE"/>
+    
+    <div class="has-feedback">
+	    <input id="{!globalId+'_typeahead'}" type="text" value="{!v.nameValue}" class="{!v.className}" 
+    	       onchange="{!c.checkNullValue}" readonly="{!v.isLoading}"/> 
+		<span class="glyphicon glyphicon-search form-control-feedback"></span>
+	</div>
+</aura:component>
