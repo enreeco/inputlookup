@@ -1,6 +1,9 @@
 <aura:component controller="InputLookupController">
+    <!-- this code was necessary before the intrduction of the "ltng:require" component
+        leaving the "requireJSLoaded" event and the "requireJSLoader" component useless
     <aura:handler event="c:requireJSLoaded" action="{!c.initTypeahead}"/>
     <c:requireJSLoader src="/resource/RequireJS" />
+    -->
     <aura:handler name="init" value="{!this}" action="{!c.setup}"/>
     
     <link rel="stylesheet" type="text/css" href="/resource/Lgt_InputLookup/css/bootstrap.min.css"/>
