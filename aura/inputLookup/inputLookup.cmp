@@ -4,6 +4,7 @@
     <aura:handler event="c:requireJSLoaded" action="{!c.initTypeahead}"/>
     <c:requireJSLoader src="/resource/RequireJS" />
     -->
+    <ltng:require scripts="/resource/RequireJS" afterScriptsLoaded="{!c.initTypeahead}" />
     <aura:handler name="init" value="{!this}" action="{!c.setup}"/>
     
     <link rel="stylesheet" type="text/css" href="/resource/Lgt_InputLookup/css/bootstrap.min.css"/>
