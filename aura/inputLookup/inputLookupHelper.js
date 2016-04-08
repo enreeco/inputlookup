@@ -1,10 +1,13 @@
+/*
+ * Author: Enrico Murru (http://enree.co, @enreeco)
+ */
 ({
     //typeahead already initialized
     typeaheadInitStatus : {},
     //"old value" to trigger reload on "v.value" change
     typeaheadOldValue : {},
     /*
-    	Creates the typeahead component using RequireJS, jQuery, Bootstrap and Bootstrap Typeahead
+        Creates the typeahead component using RequireJS, jQuery, Bootstrap and Bootstrap Typeahead
     */
     createTypeaheadComponent: function(component){
         
@@ -22,8 +25,23 @@
         //loading libraries sequentially
         require(["jquery"], function($) {
             require(["bootstrap", "boot-typeahead"], function(bootstrap, typeahead) {
+                
                 var inputElement = $('[id="'+globalId+'_typeahead"]');
-
+                
+                //init the input element
+                $A.run(function(){
+                    inputElement.val(component.get("{!v.nameValue}"));
+                });
+                
+                //handles the change function
+                inputElement.keyup(function(){
+                    $A.run(function(){
+                        if(inputElement.val() !== component.get('v.nameValue')){
+                            component.set('v.nameValue',inputElement.val());
+                            component.set('v.value', null);
+                        }
+                    });
+                });
                 //inits the typeahead
                 inputElement.typeahead({
                     hint: false,
@@ -59,8 +77,8 @@
             q = escapeRegExp(q);
             var action = component.get("c.searchSObject");
             var self = this;
-			
-			action.setParams({
+            
+            action.setParams({
                 'type' : component.get('v.type'),
                 'searchString' : q,
             });
@@ -107,7 +125,7 @@
     loadFirstValue : function(component) {
         //this is necessary to avoid multiple initializations (same event fired again and again)
         if(this.typeaheadInitStatus[component.getGlobalId()]){ 
-			return;
+            return;
         }
         this.typeaheadInitStatus[component.getGlobalId()] = true;
         this.loadValue(component);
@@ -132,7 +150,7 @@
                 return $A.error('Unexpected error: '+a.error[0].message);
             }
             var result = a.getReturnValue();
-			component.set('v.isLoading',false);
+            component.set('v.isLoading',false);
             component.set('v.nameValue',result);
             if(!skipTypeaheadLoading) self.createTypeaheadComponent(component);
         });
