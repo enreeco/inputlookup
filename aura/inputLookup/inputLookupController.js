@@ -2,18 +2,16 @@
  * Author: Enrico Murru (http://enree.co, @enreeco)
  */
 ({
+    
     /*
-        Verify component has been loaded with the required params
-    */
-    setup : function(component, event, helper){
-        if(!component.get('v.type') ){
-            $A.error("inputLookup component requires a valid SObject type as input: ["+component.getGlobalid()+"]");
-            return;
-        }
+     * Executes the search server-side action when the c:InputLookupEvt is thrown
+     */
+    handleInputLookupEvt: function(component, event, helper){
+		helper.searchAction(component, event.getParam('searchString')); 
     },
     
     /*
-        When RequireJS is loaded, loads the typeahead component
+    	Loads the typeahead component after JS libraries are loaded
     */
     initTypeahead : function(component, event, helper){
         //first load the current value of the lookup field and then

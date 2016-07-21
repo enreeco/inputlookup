@@ -2,24 +2,28 @@
  Author: Enrico Murru (http://enree.co, @enreeco)
  -->
 <aura:component controller="InputLookupAuraController">
-    <ltng:require scripts="/resource/RequireJS" afterScriptsLoaded="{!c.initTypeahead}" />
-    <aura:handler name="init" value="{!this}" action="{!c.setup}"/>
+    <ltng:require scripts="/resource/Lgt_InputLookup/js/jquery-2.2.4.min.js,
+                /resource/Lgt_InputLookup/js/bootstrap.min.js,
+                /resource/typeahead" 
+                  styles="/resource/Lgt_InputLookup/css/bootstrap.min.css"
+                  afterScriptsLoaded="{!c.initTypeahead}" />
     
-    <link rel="stylesheet" type="text/css" href="/resource/Lgt_InputLookup/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/resource/Lgt_InputLookup/css/typeahead.css"/>
-    
+    <aura:registerEvent name="inputLookupEvent" type="c:InputLookupEvt" />
+	<aura:handler name="inputLookupEvent" action="{!c.handleInputLookupEvt}"/>
+
+ 	
     <aura:attribute name="type" type="String" description="Sobject Type" required="true"/>
     <aura:attribute name="value" type="String" description="Source / Destination value" />
     <aura:attribute name="className" type="String" description="class name of the input object" />
     <!-- PRIVATE ATTRS -->
     <aura:attribute name="nameValue" type="String" description="Name of the current lookup 'name' field: loaded by controller" 
-                    access="PRIVATE"/>
+                    access="PUBLIC"/>
     <aura:attribute name="isLoading" type="Boolean" description="Loading component" default="true"
                     access="PRIVATE"/>
     
     <div class="has-feedback">
-        <input id="{!globalId+'_typeahead'}" type="text" class="{!v.className}" 
-                readonly="{!v.isLoading}"/>
-        <span class="glyphicon glyphicon-search form-control-feedback"></span>
-    </div>
+	    <input id="{!globalId+'_typeahead'}" type="text" class="{!v.className}" 
+    	        readonly="{!v.isLoading}" />
+		<span class="glyphicon glyphicon-search form-control-feedback"></span>
+	</div>
 </aura:component>

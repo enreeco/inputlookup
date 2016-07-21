@@ -1,4 +1,7 @@
-public class InputLookupController {
+/*
+ * Author: Enrico Murru (http://enree.co, @enreeco)
+ */
+public class InputLookupAuraController {
     
     /*
      * Loads the initial value of the given SObject type with ID "value"

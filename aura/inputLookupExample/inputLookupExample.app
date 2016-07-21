@@ -1,3 +1,6 @@
+<!--
+ Author: Enrico Murru (http://enree.co, @enreeco)
+ -->
 <aura:application >
 
     <aura:attribute name="id" type="String" default="" access="GLOBAL"/>
@@ -18,7 +21,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Contact</label>
                         <div class="col-sm-8">
-                            <c:inputLookup type="Contact"  
+                            <c:InputLookup type="Contact"  
                                            value="{!v.id}"
                                            className="form-control "/>
                         </div>
@@ -42,7 +45,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Contact</label>
                         <div class="col-sm-8">
-                            <c:inputLookup type="{!v.objNew.sobjectType}"
+                            <c:InputLookup type="{!v.objNew.sobjectType}"
                                            value="{!v.objNew.Id}"  
                                            className="form-control "/>
                         </div>
