@@ -1455,6 +1455,7 @@ try{
                 if (!o.input) {
                     $.error("missing input");
                 }
+                o.input = o.input[0];
                 this.isActivated = false;
                 this.autoselect = !!o.autoselect;
                 this.minLength = _.isNumber(o.minLength) ? o.minLength : 1;
@@ -1670,7 +1671,17 @@ try{
                 try {
                     !$input.attr("dir") && $input.attr("dir", "auto");
                 } catch (e) {}
-                return $input.wrap($wrapper).parent().prepend(withHint ? $hint : null).append($dropdown);
+                
+                //$input.after($wrapper).after($dropdown);
+                $input.after($wrapper);
+                $wrapper.append($input);
+                if(withHint){
+	                $wrapper.before($hint);
+                }
+                $wrapper.append($dropdown);
+                var rslt = $input;//.wrap($wrapper).parent().prepend(withHint ? $hint : null).append($dropdown);
+                
+                return $wrapper;
             }
             function getBackgroundStyles($el) {
                 return {
@@ -1708,6 +1719,7 @@ try{
                         _.each(datasets, function(d) {
                             d.highlight = !!o.highlight;
                         });
+
                         typeahead = new Typeahead({
                             input: $input,
                             eventBus: eventBus = new EventBus({
