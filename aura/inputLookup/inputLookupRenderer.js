@@ -7,10 +7,10 @@
      */
     rerender : function(component, helper){
         this.superRerender();
-        //console.log(helper.typeaheadOldValue[component.getGlobalId()], component.get('v.value'));
-		//if value changes, triggers the loading method
-        if(helper.typeaheadOldValue[component.getGlobalId()] !== component.get('v.value')){
-            helper.loadValue(component,true);
-        }
+        //UPDATE: creates problems with LockerService: this feature has been removed
+	//if value changes, triggers the loading method
+        //if(helper.typeaheadOldValue[component.getGlobalId()] !== component.get('v.value')){
+        //    helper.loadValue(component,true);
+        //}
     }
 })
