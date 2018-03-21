@@ -71,7 +71,7 @@
 
         action.setCallback(this, function(a) {
             if(a.error && a.error.length){
-                return $A.error('Unexpected error: '+a.error[0].message);
+                throw new Error('Unexpected error: '+a.error[0].message);
             }
             var result = a.getReturnValue();
             var matches, substrRegex;
@@ -132,7 +132,7 @@
         
         action.setCallback(this, function(a) {
             if(a.error && a.error.length){
-                return $A.error('Unexpected error: '+a.error[0].message);
+                throw new Error('Unexpected error: '+a.error[0].message);
             }
             var result = a.getReturnValue();
             var globalId = component.getGlobalId();
